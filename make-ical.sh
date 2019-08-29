@@ -13,11 +13,12 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 EOF
 
+export PATH=/usr/local/bin:$PATH  
 export LC_ALL=en_US.UTF-8
 export TZ=CET
 
 function gcal() {
-  gcalcli --config-folder /home/ec2-user/.gcalcli --nocolor --calendar Badminton $@
+  gcalcli --config-folder ${GCALCLI_CONFIG} --nocolor --calendar Badminton $@
 }
 
 function get-uid() {
@@ -54,7 +55,7 @@ function compose-icalevent() {
 
     if [ -n "${event}" ]; then
       local found_date=`date -d "$(echo "${event}" | awk '{print $1 " " $2}')" +%s`
-      local found_title="${event:20}"
+      local found_title="${event:21}"
 
       if [ $found_date -eq $event_date ] && [ "${title}" = "${found_title}" ]; then
         continue
