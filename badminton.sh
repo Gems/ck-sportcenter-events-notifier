@@ -8,6 +8,7 @@ export GCALCLI_CONFIG=/home/ec2-user/.gcalcli
 
 echo "$(date): Badminton started..." | tee -a ${log}
 
+./fetch-schedule.sh 2>&1 | tee -a ${log}
 ./make-ical.sh 2>&1 | tee -a ${log}
 ./upload-ical.sh 2>&1 | tee -a ${log}
 

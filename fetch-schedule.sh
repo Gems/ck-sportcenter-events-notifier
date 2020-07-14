@@ -4,7 +4,13 @@ set -e
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd $dir
 
-cookie=$(curl -vs -X POST -d "action=logIn&`head -1 .auth`" "https://ssl.forumedia.eu/ck-sportcenter.lu/login.php" 2>&1 | grep -F 'Set-Cookie' | awk '{print $3}')
+curl -vs -X POST -d "action=logIn&`head -1 .auth`" "https://ssl.forumedia.eu/ck-sportcenter.lu/login.php" 2>/tmp/badminton-cookie.out
+
+if [ "$1" == "-v" ]; then
+  cat /tmp/badminton-cookie.out
+fi
+
+cookie=$(cat /tmp/badminton-cookie.out | grep -F 'Set-Cookie' | awk '{print $3}')
 curl -s -H "Cookie: $cookie" 'https://ssl.forumedia.eu/ck-sportcenter.lu/clients_reservations.php' > /tmp/badminton.out
 
 # Convert HTML output to JSON
