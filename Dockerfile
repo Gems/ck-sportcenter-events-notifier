@@ -16,6 +16,8 @@ RUN sed -i -e "s/# $LANG.*/$LANG UTF-8/" /etc/locale.gen && \
 RUN ln -s /app/cron.hourly/1badminton-organizer /etc/cron.hourly/1badminton-organizer
 RUN rm -f /etc/crontab && ln -s /app/crontab /etc/crontab
 
+RUN echo "Testing…"
+RUN /app/badminton.sh
 
 CMD /app/entrypoint.sh 
 
