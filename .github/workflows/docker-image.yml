@@ -16,5 +16,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build & Run the Docker image
-      run: docker build . --file Dockerfile --tag bad:$(date +%s) && docker run bad:$(date +%s)
+      run: docker build . --file Dockerfile --tag bad:$(date +%s)
 
