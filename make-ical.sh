@@ -51,18 +51,16 @@ function compose-icalevent() {
       continue
     fi
 
-    #local event=`gcal search "${description}" | grep -vE '^$' | grep -vFi 'No events'`
+    local event=`gcal search "${description}" | grep -vE '^$' | grep -vFi 'No events'`
 
-    #if [ -n "${event}" ]; then
-    #  local found_date=`date -d "$(echo "${event}" | awk '{print $1 " " $2}')" +%s`
-    #  local found_title="${event:21}"
-    #
-    #  if [ $found_date -eq $event_date ] && [ "${title}" = "${found_title}" ]; then
-    #    continue
-    #  fi
-    #
-    #  echo gcal delete "${description}" --iamaexpert >&2
-    #fi
+    if [ -n "${event}" ]; then
+      local found_date=`date -d "$(echo "${event}" | awk '{print $1 " " $2}')" +%s`
+      local found_title="${event:21}"
+    
+      if [ $found_date -eq $event_date ] && [ "${title}" = "${found_title}" ]; then
+        continue
+      fi
+    fi
 
     printf "\
 BEGIN:VEVENT\n\
