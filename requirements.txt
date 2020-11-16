@@ -1,4 +1,4 @@
-gcalcli
+gcalcli==v4.1.0
 vobject
 codenamize
 

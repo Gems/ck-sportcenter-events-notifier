@@ -39,7 +39,7 @@ function get-datetime() {
 
 function compose-icalevent() {
   while IFS='%' read -r title date time desc; do
-    local uid=`get-uid "event-${date}-${time}"`
+    local uid=`get-uid "event-${date}-${time}-${title}"`
     local start_date=`get-datetime ${date} ${time} +%Y%m%dT%H%M%SZ`
     local end_date=`get-datetime ${date} ${time} +%Y%m%dT%H%M%SZ '+1 hour'`
     local description=`./namer.py ${uid}`
@@ -51,18 +51,18 @@ function compose-icalevent() {
       continue
     fi
 
-    local event=`gcal search "${description}" | tr -d '\n' | grep -vFi 'No events'`
+    #local event=`gcal search "${description}" | grep -vE '^$' | grep -vFi 'No events'`
 
-    if [ -n "${event}" ]; then
-      local found_date=`date -d "$(echo "${event}" | awk '{print $1 " " $2}')" +%s`
-      local found_title="${event:21}"
-
-      if [ $found_date -eq $event_date ] && [ "${title}" = "${found_title}" ]; then
-        continue
-      fi
-
-      gcal delete "${description}" --iamaexpert >&2
-    fi
+    #if [ -n "${event}" ]; then
+    #  local found_date=`date -d "$(echo "${event}" | awk '{print $1 " " $2}')" +%s`
+    #  local found_title="${event:21}"
+    #
+    #  if [ $found_date -eq $event_date ] && [ "${title}" = "${found_title}" ]; then
+    #    continue
+    #  fi
+    #
+    #  echo gcal delete "${description}" --iamaexpert >&2
+    #fi
 
     printf "\
 BEGIN:VEVENT\n\
