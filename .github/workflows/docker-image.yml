@@ -1,10 +1,10 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 13 * * *'
+
 
 jobs:
 
@@ -14,7 +14,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    - name: Run the Docker image
-      run: docker run my-image-name:$(date +%s)
+    - name: Build & Run the Docker image
+      run: docker build . --file Dockerfile --tag bad:$(date +%s) && docker run bad:$(date +%s)
+
