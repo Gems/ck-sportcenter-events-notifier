@@ -2,6 +2,10 @@ FROM python:3.8-slim-buster
 #FROM alpine:3.12
 #RUN apk add --no-cache cron
 
+ENV LANG en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+
+RUN mkdir -p /app/.auth/.gcalcli
 COPY . /app
 
 RUN apt-get update && apt-get install -y curl jq locales && pip install -r /app/requirements.txt
@@ -19,10 +23,6 @@ ARG ICAL_TMPL
 ARG GCAL_CLI_CACHE
 ARG GCAL_CLI_OAUTH
 
-ENV LANG en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8
-
-RUN mkdir -p /app/.auth/.gcalcli
 RUN echo "$ICAL_TMPL" >/app/ical.tmpl
 RUN echo "$WEB_CREDS" >/app/.auth/web-creds
 RUN echo "$GCAL_CLI_CACHE" >/app/.auth/.gcalcli/cache
