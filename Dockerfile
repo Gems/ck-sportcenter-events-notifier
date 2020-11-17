@@ -2,14 +2,6 @@ FROM python:3.8-slim-buster
 #FROM alpine:3.12
 #RUN apk add --no-cache cron
 
-ARG WEB_CREDS
-ARG ICAL_TMPL
-ARG GCAL_CLI_CACHE
-ARG GCAL_CLI_OAUTH
-
-ENV LANG en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8
-
 COPY . /app
 
 RUN apt-get update && apt-get install -y curl jq locales && pip install -r /app/requirements.txt
@@ -21,6 +13,14 @@ RUN sed -i -e "s/# $LANG.*/$LANG UTF-8/" /etc/locale.gen && \
 
 #RUN ln -s /app/cron.hourly/1badminton-organizer /etc/cron.hourly/1badminton-organizer
 #RUN rm -f /etc/crontab && ln -s /app/crontab /etc/crontab
+
+ARG WEB_CREDS
+ARG ICAL_TMPL
+ARG GCAL_CLI_CACHE
+ARG GCAL_CLI_OAUTH
+
+ENV LANG en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 
 RUN mkdir -p /app/.auth/.gcalcli
 RUN echo "$ICAL_TMPL" >/app/ical.tmpl
