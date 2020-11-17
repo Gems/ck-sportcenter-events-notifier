@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+#set -e
 log="/var/log/badminton.log"
 dir="$( cd "$( dirname "$(realpath ${BASH_SOURCE[0]})" )" >/dev/null 2>&1 && pwd )"
 cd ${dir} >/dev/null
