@@ -17,10 +17,10 @@ ARG ICAL_TMPL
 ARG GCAL_CLI_CACHE
 ARG GCAL_CLI_OAUTH
 
-RUN echo "$ICAL_TMPL" >/app/ical.tmpl
-RUN echo "$WEB_CREDS" >/app/.auth/web-creds
-RUN echo "$GCAL_CLI_CACHE" >/app/.auth/.gcalcli/cache
-RUN echo "$GCAL_CLI_OAUTH" >/app/.auth/.gcalcli/oauth
+RUN if [ -n "$ICAL_TMPL" ]; then echo "$ICAL_TMPL" >/app/ical.tmpl; fi
+RUN if [ -n "$WEB_CREDS" ]; then echo "$WEB_CREDS" >/app/.auth/web-creds; fi
+RUN if [ -n "$GCAL_CLI_CACHE" ]; then echo "$GCAL_CLI_CACHE" >/app/.auth/.gcalcli/cache; fi
+RUN if [ -n "$GCAL_CLI_OAUTH" ]; then echo "$GCAL_CLI_OAUTH" >/app/.auth/.gcalcli/oauth; fi
 
 RUN echo "Testing…"
 RUN /app/badminton.sh

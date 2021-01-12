@@ -1,0 +1,25 @@
+1482a1483
+> 
+1483a1485
+> 
+1484a1487,1496
+>                     displayName = attendee.name
+>                     responseStatus = None
+>                     
+>                     if hasattr(attendee, 'params'):
+>                         if 'CN' in attendee.params and attendee.params['CN']:
+>                             displayName = attendee.params['CN'][0]
+> 
+>                         if 'PARTSTAT' in attendee.params and 'NEEDS-ACTION' in attendee.params['PARTSTAT']:
+>                             responseStatus = 'needsAction'
+>                     
+1488a1501
+>                     
+1492,1493c1505,1508
+<                     event['attendees'].append({'displayName': attendee.name,
+<                                                'email': email})
+---
+>                     attendeeInfo = { 'displayName': displayName,
+>                                      'email': email, 
+>                                      'responseStatus': responseStatus }
+>                     event['attendees'].append(attendeeInfo)
