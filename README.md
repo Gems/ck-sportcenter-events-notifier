@@ -19,5 +19,3 @@ The following format is expected:
 ```
 username={username goes here}&password={password goes here}
 ```
-
-
