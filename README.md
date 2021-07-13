@@ -1,4 +1,3 @@
-
 ## `${ICAL_TMPL}`
 
 The `${ICAL_TMPL}` secret variable contents gets added as is to the ICAL event content.
