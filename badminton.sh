@@ -11,6 +11,7 @@ echo "$(date): Badminton started..." | tee -a ${log}
 ./fetch-schedule.sh 2>&1 | tee -a ${log}
 ./make-ical.sh 2>&1 | tee -a ${log}
 ./upload-ical.sh 2>&1 | tee -a ${log}
+./call-for-rsvp.sh
 
 echo -e "Badminton's done\n\n" | tee -a ${log}
 
