@@ -16,6 +16,9 @@ function send_message
 DOW=$(date +%a)
 
 if [ "$DOW" == "Mon" ]; then
+  echo "Hooray, it's Monday! Sending the message"
   send_message "Мальчики, кто заряжен на завтрашнюю тренировку? Кстати, я пока не умею смотреть в календарь, поэтому убедитесь, что корты зарезервированы ☝🏻"
+else
+  echo "Skip sending the message, 'cause it's not Monday ($DOW)"
 fi
  
