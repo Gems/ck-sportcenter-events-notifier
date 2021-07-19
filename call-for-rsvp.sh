@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ -z "$TELEGRAM_BOT_TOKEN" -o -z "$TELEGRAM_CHAT_ID" ]; then
-  echo "Could n't send a notification for the call for RSVP. Telegram token or/and char aren't configured." >&2
+  echo "Could not send a notification for the call for RSVP. Telegram token or/and chat aren't configured." >&2
   exit 0
 fi
 
