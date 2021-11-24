@@ -18,7 +18,7 @@ ARG GCAL_CLI_CACHE
 ARG GCAL_CLI_OAUTH
 ARG TELEGRAM_BOT_TOKEN
 ARG TELEGRAM_CHAT_ID
-
+ARG DEBUG
 
 RUN if [ -n "$ICAL_TMPL" ]; then echo "$ICAL_TMPL" >/app/ical.tmpl; fi
 RUN if [ -n "$WEB_CREDS" ]; then echo "$WEB_CREDS" >/app/.auth/web-creds; fi
