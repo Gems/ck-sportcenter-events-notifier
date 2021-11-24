@@ -6,6 +6,8 @@ on:
     - cron:  '0 13 * * *'
   push:
     branches: master
+  pull_request:
+    branches: master
 
 jobs:
 
@@ -23,6 +25,7 @@ jobs:
         GCAL_CLI_OAUTH: ${{ secrets.GCAL_CLI_OAUTH }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        DEBUG: ${{ secrets.DEBUG }}
 
-      run: docker build . --file Dockerfile --tag bad:$(date +%s) --build-arg ICAL_TMPL="${ICAL_TMPL}" --build-arg WEB_CREDS="${WEB_CREDS}" --build-arg GCAL_CLI_CACHE="${GCAL_CLI_CACHE}" --build-arg GCAL_CLI_OAUTH="${GCAL_CLI_OAUTH}" --build-arg TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN}" --build-arg TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID}" 
+      run: docker build . --file Dockerfile --tag bad:$(date +%s) --build-arg DEBUG="${DEBUG}" --build-arg ICAL_TMPL="${ICAL_TMPL}" --build-arg WEB_CREDS="${WEB_CREDS}" --build-arg GCAL_CLI_CACHE="${GCAL_CLI_CACHE}" --build-arg GCAL_CLI_OAUTH="${GCAL_CLI_OAUTH}" --build-arg TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN}" --build-arg TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID}" 
 
