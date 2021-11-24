@@ -19,7 +19,7 @@ function send_sticker
 
 DOW=$(date +%a)
 
-if [ "$DOW" == "Tue" ]; then
+if [ -n "${DEBUG}" -o "${DOW}" == "Tue" ]; then
   echo "Hooray, it's Tuesday! Sending the message"
   send_message "Мальчики, кто заряжен на завтрашнюю тренировку? Кстати, я пока не умею смотреть в календарь, поэтому убедитесь, что корты зарезервированы."
   send_sticker "CAACAgIAAxkBAAEDVkFhm6EKnKkvlcvpTHSGfUNGqdtq6QACSAADUomRI27ZLqicPU8AASIE"
