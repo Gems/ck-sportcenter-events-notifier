@@ -17,11 +17,36 @@ function send_sticker
   curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendSticker" -H "Content-Type: application/json" -d "${PAYLOAD}" 
 }
 
+function send_poll
+{
+  local is_anonymous="$1"
+  shift
+  local allow_multiple_answers="$1"
+  shift
+  local question="$1"
+  shift
+
+  local delim=""
+  local answers=""
+
+  for x in "$@"; do
+    #echo "$x";
+    answers="${answers}${delim}\"${x}\""
+    delim=", "
+  done
+  
+  local PAYLOAD="{\"chat_id\": ${TELEGRAM_CHAT_ID}, \"question\": \"${question}\", \"is_anonymous\": \"${is_anonymous}\", \"allows_multiple_answers\":\"${allow_multiple_answers}\", \"options\": [${answers}]}"
+  curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPoll" -H "Content-Type: application/json" -d "${PAYLOAD}" 
+  #echo ${PAYLOAD}
+}
+
+
 DOW=$(date +%a)
 
 if [ -n "${DEBUG}" -o "${DOW}" == "Tue" ]; then
   echo "Hooray, it's Tuesday! Sending the message"
-  send_message "Мальчики, кто заряжен на завтрашнюю тренировку? Кстати, я пока не умею смотреть в календарь, поэтому убедитесь, что корты зарезервированы."
+  send_poll false false "Мальчики, кто заряжен на завтрашнюю тренировку? 🏸" "👍 Я охеренно заряжен! ⚡" "👎 Не, я пасану... 🥴"
+  send_message "(Кстати, я пока не умею смотреть в календарь, поэтому убедитесь, что корты зарезервированы)"
   send_sticker "CAACAgIAAxkBAAEDVkFhm6EKnKkvlcvpTHSGfUNGqdtq6QACSAADUomRI27ZLqicPU8AASIE"
 else
   echo "Skip sending the message, 'cause it's not Tuesday ($DOW)"
