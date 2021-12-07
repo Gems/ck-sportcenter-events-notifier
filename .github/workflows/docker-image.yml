@@ -17,6 +17,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/download-artifact@v2
+      with:
+        name: previous-reservations
+        path: ./previous_reservations.json
+    - name: Get tag name
+      id: prepare
+      run: run: echo "::set-output name=tag_name::bad$(date +%s)"
     - name: Run the badminton organizer by building the Docker image
       env:
         ICAL_TMPL: ${{ secrets.ICAL_TMPL }}
@@ -26,6 +33,21 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         DEBUG: ${{ secrets.DEBUG }}
-
-      run: docker build . --file Dockerfile --tag bad:$(date +%s) --build-arg DEBUG="${DEBUG}" --build-arg ICAL_TMPL="${ICAL_TMPL}" --build-arg WEB_CREDS="${WEB_CREDS}" --build-arg GCAL_CLI_CACHE="${GCAL_CLI_CACHE}" --build-arg GCAL_CLI_OAUTH="${GCAL_CLI_OAUTH}" --build-arg TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN}" --build-arg TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID}" 
-
+      run: | 
+        docker build . 
+        --file Dockerfile 
+        --tag ${{steps.prepare.outputs.tag_name}}
+        --build-arg DEBUG="${DEBUG}" 
+        --build-arg ICAL_TMPL="${ICAL_TMPL}" 
+        --build-arg WEB_CREDS="${WEB_CREDS}" 
+        --build-arg GCAL_CLI_CACHE="${GCAL_CLI_CACHE}" 
+        --build-arg GCAL_CLI_OAUTH="${GCAL_CLI_OAUTH}" 
+        --build-arg TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN}" 
+        --build-arg TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID}" 
+        && docker run -it ${{steps.prepare.outputs.tag_name}}
+    - name: Copy reservations artifact
+      run: docker cp ${{steps.prepare.outputs.tag_name}}:/tmp/current_reservations.json ./previous_reservations.json
+    - uses: actions/upload-artifact@v2
+      with:
+        name: previous-reservations
+        path: ./previous_reservations.json
