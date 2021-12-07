@@ -5,6 +5,7 @@ ENV LC_ALL=en_US.UTF-8
 
 RUN mkdir -p /app/.auth/.gcalcli
 COPY . /app
+COPY previous_reservations.json /tmp/
 
 RUN apt-get update && apt-get install -y curl jq locales && pip install -r /app/requirements.txt
 RUN sed -i -e "s/# $LANG.*/$LANG UTF-8/" /etc/locale.gen && \
