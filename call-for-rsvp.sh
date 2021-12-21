@@ -43,12 +43,12 @@ function send_poll
 
 DOW=$(date +%a)
 
-if [ -n "${DEBUG}" -o "${DOW}" == "Tue" ]; then
-  echo "Hooray, it's Tuesday! Sending the message"
+if [ -n "${DEBUG}" -o "${DOW}" == "Mon" ]; then
+  echo "Hooray, it's Monday! Sending the message"
   send_poll false false "Мальчики, кто заряжен на завтрашнюю тренировку? 🏸" "👍 Я охеренно заряжен! ⚡" "👎 Не, я пасану... 🥴"
   send_message "(Кстати, я пока не умею смотреть в календарь, поэтому убедитесь, что корты зарезервированы)"
   send_sticker "CAACAgIAAxkBAAEDVkFhm6EKnKkvlcvpTHSGfUNGqdtq6QACSAADUomRI27ZLqicPU8AASIE"
 else
-  echo "Skip sending the message, 'cause it's not Tuesday ($DOW)"
+  echo "Skip sending the message, 'cause it's not Monday (it is $DOW)"
 fi
  
