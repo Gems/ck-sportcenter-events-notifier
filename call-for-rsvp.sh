@@ -99,8 +99,9 @@ function display_additional_info
 
 DOW=$(date +%a)
 
-if [ -n "${DEBUG}" -o "${DOW}" == "Fri" ]; then
+if [ -n "${DEBUG}" -o "${DOW}" == "Mon" ]; then
   echo "Hooray, it's Monday! Sending the message"
+  
   today_date=`date +%A", "%d" "%B" "%Y`
   send_message "Привет, мальчики! Сегодня ${today_date}"
   send_poll false false "Кто заряжен на тренировку на этой неделе? 🏸" "👍 Я охеренно заряжен! ⚡" "👎 Не, я пасану... 🥴"
