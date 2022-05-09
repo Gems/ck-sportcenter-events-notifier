@@ -5,6 +5,9 @@ if [ -z "$TELEGRAM_BOT_TOKEN" -o -z "$TELEGRAM_CHAT_ID" ]; then
   exit 0
 fi
 
+echo "Telegram bot token: $TELEGRAM_BOT_TOKEN"
+echo "Telegram chat id: $TELEGRAM_CHAT_ID"
+
 function send_message
 {
   local MESSAGE="{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}"
