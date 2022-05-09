@@ -72,16 +72,16 @@ function send_poll
 
 function display_additional_info
 {
-  local today_day_of_week=`$(date +%a)`
+  local today_day_of_week=$(date +%a)
   if [ "${today_day_of_week}" == "Sun" ]; then
-    local week_start_date=`date -d "next-monday" +%d.%m.%Y` # next Monday
-    local week_end_date=`date -d "next-sunday" +%d.%m.%Y` # next Sunday
+    local week_start_date=$(date -d "next-monday" +%d.%m.%Y) # next Monday
+    local week_end_date=$(date -d "next-sunday" +%d.%m.%Y) # next Sunday
   else
-    local week_start_date=`date -d "last-sunday +1 day" +%d.%m.%Y` # crrent/last Monday
-    local week_end_date=`date -d "next-sunday" +%d.%m.%Y` # next Sunday
+    local week_start_date=$(date -d "last-sunday +1 day" +%d.%m.%Y) # crrent/last Monday
+    local week_end_date=$(date -d "next-sunday" +%d.%m.%Y) # next Sunday
   fi
 
-  local reservations_string="`jq --arg s ${week_start_date} --arg e ${week_end_date} '.[] | select(.date != null) | select((.date | strptime("%d.%m.%Y") | mktime) >= ($s| strptime("%d.%m.%Y") | mktime) and (.date | strptime("%d.%m.%Y") | mktime) <= ($e| strptime("%d.%m.%Y") | mktime))' /tmp/badminton.json | jq -s 'group_by(.date)[] | group_by(.title)[] | {date: .[0].date, reservations: (.[0].title + " - " + (length|tostring) + "h")}' | jq -s 'group_by(.date)[] | "       ► " + .[0].date + ": " + (map(.reservations | tojson) | unique | join(", "))' | tr -d '\\\\"'`"
+  local reservations_string="$(jq --arg s ${week_start_date} --arg e ${week_end_date} '.[] | select(.date != null) | select((.date | strptime("%d.%m.%Y") | mktime) >= ($s| strptime("%d.%m.%Y") | mktime) and (.date | strptime("%d.%m.%Y") | mktime) <= ($e| strptime("%d.%m.%Y") | mktime))' /tmp/badminton.json | jq -s 'group_by(.date)[] | group_by(.title)[] | {date: .[0].date, reservations: (.[0].title + " - " + (length|tostring) + "h")}' | jq -s 'group_by(.date)[] | "       ► " + .[0].date + ": " + (map(.reservations | tojson) | unique | join(", "))' | tr -d '\\\\"')"
   
   #echo "Reservations text: ${reservations_string}"
 
@@ -102,7 +102,7 @@ DOW=$(date +%a)
 if [ -n "${DEBUG}" -o "${DOW}" == "Mon" ]; then
   echo "Hooray, it's Monday! Sending the message"
   
-  today_date=`date +%A", "%d" "%B" "%Y`
+  today_date=$(date +%A", "%d" "%B" "%Y)
   send_message "Привет, мальчики! Сегодня ${today_date}"
   send_poll false false "Кто заряжен на тренировку на этой неделе? 🏸" "👍 Я охеренно заряжен! ⚡" "👎 Не, я пасану... 🥴"
   display_additional_info
