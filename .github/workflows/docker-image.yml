@@ -3,7 +3,7 @@ name: Docker Image CI
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '0 9 * * *'
+    - cron:  '0 10 * * *'
   push:
     branches: master
   pull_request:
