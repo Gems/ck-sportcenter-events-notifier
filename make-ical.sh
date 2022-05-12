@@ -39,8 +39,6 @@ function get-datetime() {
 
 function compose-icalevent() {
   while IFS='%' read -r title date time duration; do
-    echo "Reservation: ${title} ${date} ${time} ${duration}" >&2
-
     local uid=`get-uid "event-${date}-${time}-${title}-${duration}"`
     local start_date=`get-datetime ${date} ${time} +%Y%m%dT%H%M%SZ`
     local end_date=`get-datetime ${date} ${time} +%Y%m%dT%H%M%SZ "+${duration} hour"`
