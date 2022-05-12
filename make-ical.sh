@@ -39,6 +39,8 @@ function get-datetime() {
 
 function compose-icalevent() {
   while IFS='%' read -r title date time duration; do
+    echo "Reservation: ${title} ${date} ${time} ${duration}" >&2
+
     local uid=`get-uid "event-${date}-${time}-${title}-${duration}"`
     local start_date=`get-datetime ${date} ${time} +%Y%m%dT%H%M%SZ`
     local end_date=`get-datetime ${date} ${time} +%Y%m%dT%H%M%SZ "+${duration} hour"`
@@ -85,7 +87,7 @@ END:VEVENT\n"
 #So we treat the number of reservations of a single court as the total reservation duration in hours for the court on the given day.
 
 cat ${SCHEDULE_JSON} \
-  | jq --raw-output -s '.[] | group_by(.date)[] | group_by(.title)[] | "\(.[0].title)%\(.[0].date)%\(.[0].start)%\(length|tostring)"' \
+  | jq --raw-output -s '.[] | group_by(.date)[] | group_by(.title)[] | "\(.[0].title)%\(.[0].date)%\(min_by(.start).start)%\(length|tostring)"' \
   | grep -vE '^null' \
   | compose-icalevent >>${ICAL_SCHEDULE}
 
