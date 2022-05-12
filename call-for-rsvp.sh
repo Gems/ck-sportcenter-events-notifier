@@ -73,18 +73,30 @@ function send_poll
   #echo "Poll payload: ${PAYLOAD}"
 }
 
-function display_additional_info
+function get_reservations_string
 {
   local today_day_of_week=$(date +%a)
   if [ "${today_day_of_week}" == "Sun" ]; then
     local week_start_date=$(date -d "next-monday" +%d.%m.%Y) # next Monday
     local week_end_date=$(date -d "next-sunday" +%d.%m.%Y) # next Sunday
   else
-    local week_start_date=$(date -d "last-sunday +1 day" +%d.%m.%Y) # crrent/last Monday
+    local week_start_date=$(date -d "last-sunday +1 day" +%d.%m.%Y) # current/last Monday
     local week_end_date=$(date -d "next-sunday" +%d.%m.%Y) # next Sunday
   fi
 
-  local reservations_string="$(jq --arg s ${week_start_date} --arg e ${week_end_date} '.[] | select(.date != null) | select((.date | strptime("%d.%m.%Y") | mktime) >= ($s| strptime("%d.%m.%Y") | mktime) and (.date | strptime("%d.%m.%Y") | mktime) <= ($e| strptime("%d.%m.%Y") | mktime))' /tmp/badminton.json | jq -s 'group_by(.date)[] | group_by(.title)[] | {date: .[0].date, reservations: (.[0].title + " - " + (length|tostring) + "h")}' | jq -s 'group_by(.date)[] | "       ► " + .[0].date + ": " + (map(.reservations | tojson) | unique | join(", "))' | tr -d '\\\\"')"
+  local LATER_THAN_WEEK_START_FILTER='(.date | strptime("%d.%m.%Y") | mktime) >= ($s | strptime("%d.%m.%Y") | mktime)'
+  local EARLIER_THAN_WEEK_END_FILTER='(.date | strptime("%d.%m.%Y") | mktime) <= ($e | strptime("%d.%m.%Y") | mktime)'
+
+  jq --arg s ${week_start_date} --arg e ${week_end_date} \
+      ".[] | select(.date != null) | select($LATER_THAN_WEEK_START_FILTER and $EARLIER_THAN_WEEK_END_FILTER)" ${SCHEDULE_JSON} \
+    | jq -s 'group_by(.date)[] | group_by(.title)[] | {date: .[0].date, reservations: (.[0].title + " - " + (length|tostring) + "h")}' \
+    | jq -s 'group_by(.date)[] | "       ► " + .[0].date + ": " + (map(.reservations | tojson) | unique | join(", "))' \
+    | tr -d '\\\\"'
+}
+
+function display_additional_info
+{
+  local reservations_string="$(get_reservation_string)"
   
   #echo "Reservations text: ${reservations_string}"
 
