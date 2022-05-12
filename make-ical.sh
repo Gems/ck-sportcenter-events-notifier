@@ -4,8 +4,6 @@
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd $dir
 
-export ICAL_SCHEDULE=/tmp/schedule.ical
-
 # Prepare ICAL template
 cat >${ICAL_SCHEDULE} <<EOF
 BEGIN:VCALENDAR
@@ -40,10 +38,10 @@ function get-datetime() {
 }
 
 function compose-icalevent() {
-  while IFS='%' read -r title date time desc; do
-    local uid=`get-uid "event-${date}-${time}-${title}"`
+  while IFS='%' read -r title date time duration; do
+    local uid=`get-uid "event-${date}-${time}-${title}-${duration}"`
     local start_date=`get-datetime ${date} ${time} +%Y%m%dT%H%M%SZ`
-    local end_date=`get-datetime ${date} ${time} +%Y%m%dT%H%M%SZ '+1 hour'`
+    local end_date=`get-datetime ${date} ${time} +%Y%m%dT%H%M%SZ "+${duration} hour"`
     local description=`./namer.py ${uid}`
 
     local curr_date=`date -u +%s`
@@ -83,7 +81,13 @@ END:VEVENT\n"
   done <&0
 }
 
-cat ${SCHEDULE_JSON} | jq --raw-output '.[] | "\(.title)%\(.date)%\(.start)%\(.description)"' | grep -vE '^null' | compose-icalevent >>${ICAL_SCHEDULE}
+# We assume that if there are many reservations for a single court on a single date, the reservations are consecutive.
+#So we treat the number of reservations of a single court as the total reservation duration in hours for the court on the given day.
+
+cat ${SCHEDULE_JSON} \
+  | jq --raw-output -s '.[] | group_by(.date)[] | group_by(.title)[] | "\(.[0].title)%\(.[0].date)%\(min_by(.start).start)%\(length|tostring)"' \
+  | grep -vE '^null' \
+  | compose-icalevent >>${ICAL_SCHEDULE}
 
 cat >>${ICAL_SCHEDULE} <<__EOF
 END:VCALENDAR
