@@ -1,4 +1,4 @@
-name: Build docker, update calendar, send notifications
+name: Run Badminton
 
 on:
   schedule:
