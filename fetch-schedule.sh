@@ -14,9 +14,13 @@ cookie=$(cat /tmp/badminton-cookie.out | grep -F 'Set-Cookie' | awk '{print $3}'
 curl --http1.1 -s -H "Cookie: $cookie" 'https://ck-sportcenter.lu/clients_reservations.php' > /tmp/badminton.out
 
 # Convert HTML output to JSON
-echo '[' >/tmp/badminton.json
+echo '[' >${SCHEDULE_JSON}
 
-cat /tmp/badminton.out | grep -E '^(<tr|</tr>|<td>)' | grep -vE '(nbsp|Badminton|GH|\[SY\])' | sed -E 's/<tr.+>/{/g;s/.+tr>/},/g;s/<.?td>//g;s/([0-9]{2}.[0-9]{2}.[0-9]{4})/"date": "\1",/g;s/([0-9]{2}:[0-9]{2}) -/"start": "\1",/g;s/ [0-9]{2}:[0-9]{2}//g;s/(Court.+)/"title": "\1"/g;s/^([^"}{].+)/,"description": "\1"/g;' | tail -n +3 >>/tmp/badminton.json
+cat /tmp/badminton.out \
+  | grep -E '^(<tr|</tr>|<td>)' \
+  | grep -vE '(nbsp|Badminton|GH|\[SY\])' \
+  | sed -E 's/<tr.+>/{/g;s/.+tr>/},/g;s/<.?td>//g;s/([0-9]{2}.[0-9]{2}.[0-9]{4})/"date": "\1",/g;s/([0-9]{2}:[0-9]{2}) -/"start": "\1",/g;s/ [0-9]{2}:[0-9]{2}//g;s/(Court.+)/"title": "\1"/g;s/^([^"}{].+)/,"description": "\1"/g;' \
+  | tail -n +3 >>${SCHEDULE_JSON}
 
-echo "{}]" >>/tmp/badminton.json
+echo "{}]" >>${SCHEDULE_JSON}
 
