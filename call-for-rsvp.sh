@@ -90,11 +90,11 @@ function display_additional_info
 
   if [ -z "${reservations_string}" ]
   then
-    send_message "😱 O.M.G. ‼️ У нас нет зарезервированных кортов на этой неделе❗\n\n@andreyprag всё под контролем⁉️"
+    send_message "😱 O.M.G. ‼️ У нас нет зарезервированных кортов на этой неделе❗\n\n${CLUB_MANAGER_TELEGRAM_NICK} всё под контролем⁉️"
     #send_sticker "CAACAgIAAxkBAAEEozlidMUCwS_lpQ_UIQRs_j3dkvaNNgACugUAAj-VzArb-JYvDlr2bCQE"
     send_sticker "$(get_random_sticker no-reservation)"
   else
-    send_message "✍️ По кортам - у нас забронировано:\n${reservations_string}\n\n@andreyprag ❤️"
+    send_message "✍️ По кортам - у нас забронировано:\n${reservations_string}\n\n${CLUB_MANAGER_TELEGRAM_NICK} ❤️"
     #send_sticker "CAACAgIAAxkBAAEEozdidMSw9bPzUCTgR4lBsv-NQJ98ygACvAUAAj-VzAoTSKpoG9FPRiQE"
     send_sticker "$(get_random_sticker)"
   fi

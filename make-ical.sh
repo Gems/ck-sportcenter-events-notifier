@@ -4,8 +4,10 @@
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd $dir
 
+export ICAL_SCHEDULE=/tmp/schedule.ical
+
 # Prepare ICAL template
-cat >/tmp/badminton.ical <<EOF
+cat >${ICAL_SCHEDULE} <<EOF
 BEGIN:VCALENDAR
 VERSION:2.0
 PROID:-//Gems//Kockelshoer Fetcher 0.1/EN
@@ -81,9 +83,9 @@ END:VEVENT\n"
   done <&0
 }
 
-cat /tmp/badminton.json | jq --raw-output '.[] | "\(.title)%\(.date)%\(.start)%\(.description)"' | grep -vE '^null' | compose-icalevent >>/tmp/badminton.ical
+cat ${SCHEDULE_JSON} | jq --raw-output '.[] | "\(.title)%\(.date)%\(.start)%\(.description)"' | grep -vE '^null' | compose-icalevent >>${ICAL_SCHEDULE}
 
-cat >>/tmp/badminton.ical <<__EOF
+cat >>${ICAL_SCHEDULE} <<__EOF
 END:VCALENDAR
 __EOF
 
