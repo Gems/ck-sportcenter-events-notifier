@@ -17,17 +17,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Run the badminton organizer by building the Docker image
-      env:
-        ICAL_TMPL: ${{ secrets.ICAL_TMPL }}
-        WEB_CREDS: ${{ secrets.WEB_CREDS }}
-        GCAL_CLI_CACHE: ${{ secrets.GCAL_CLI_CACHE }}
-        GCAL_CLI_OAUTH: ${{ secrets.GCAL_CLI_OAUTH }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        DEBUG: ${{ secrets.DEBUG }}
-        CLUB_MANAGER_TELEGRAM_NICK: ${{ secrets.CLUB_MANAGER_TELEGRAM_NICK }}
+      - name: Code Checkout
+        uses: actions/checkout@v2
+      - name: Docker Layers Caching
+        uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+      - name: Run the badminton organizer by building the Docker image
+        env:
+          ICAL_TMPL: ${{ secrets.ICAL_TMPL }}
+          WEB_CREDS: ${{ secrets.WEB_CREDS }}
+          GCAL_CLI_CACHE: ${{ secrets.GCAL_CLI_CACHE }}
+          GCAL_CLI_OAUTH: ${{ secrets.GCAL_CLI_OAUTH }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DEBUG: ${{ secrets.DEBUG }}
+          CLUB_MANAGER_TELEGRAM_NICK: ${{ secrets.CLUB_MANAGER_TELEGRAM_NICK }}
 
-      run: docker build . --file Dockerfile --tag bad:$(date +%s) --build-arg DEBUG="${DEBUG}" --build-arg ICAL_TMPL="${ICAL_TMPL}" --build-arg WEB_CREDS="${WEB_CREDS}" --build-arg GCAL_CLI_CACHE="${GCAL_CLI_CACHE}" --build-arg GCAL_CLI_OAUTH="${GCAL_CLI_OAUTH}" --build-arg TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN}" --build-arg TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID}"  --build-arg CLUB_MANAGER_TELEGRAM_NICK="${CLUB_MANAGER_TELEGRAM_NICK}" 
+        run: docker build . --file Dockerfile --tag bad:$(date +%s) --build-arg DEBUG="${DEBUG}" --build-arg ICAL_TMPL="${ICAL_TMPL}" --build-arg WEB_CREDS="${WEB_CREDS}" --build-arg GCAL_CLI_CACHE="${GCAL_CLI_CACHE}" --build-arg GCAL_CLI_OAUTH="${GCAL_CLI_OAUTH}" --build-arg TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN}" --build-arg TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID}"  --build-arg CLUB_MANAGER_TELEGRAM_NICK="${CLUB_MANAGER_TELEGRAM_NICK}" 
 
