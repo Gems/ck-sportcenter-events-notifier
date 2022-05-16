@@ -96,7 +96,7 @@ function get_reservations_string
 
 function display_additional_info
 {
-  local reservations_string="$(get_reservation_string)"
+  local reservations_string="$(get_reservations_string)"
   
   #echo "Reservations text: ${reservations_string}"
 
