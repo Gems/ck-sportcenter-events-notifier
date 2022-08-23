@@ -30,4 +30,4 @@ RUN pip install -r /app/requirements.txt
 
 COPY . /app
 
-RUN if [ -z "$NO_RUN" ]; then echo "Testing…"; /app/badminton.sh; fi
+RUN echo "Testing…" && /app/badminton.sh
