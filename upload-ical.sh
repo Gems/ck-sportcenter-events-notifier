@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-#set -e
+set -e
+set -x
 export PATH=/usr/local/bin:$PATH
 export LC_ALL=en_US.UTF-8
 
