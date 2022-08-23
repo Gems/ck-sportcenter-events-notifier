@@ -19,6 +19,11 @@ RUN apt-get update && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=$LANG
 
+COPY ./requirements.txt /app
+RUN pip install -r /app/requirements.txt
+
+COPY . /app
+
 RUN --mount=type=secret,id=ical,target=/app/.config/ical \
     --mount=type=secret,id=web-creds,target=/app/.config/web-creds \
     --mount=type=secret,id=gcalcli-oauth,target=/app/.config/gcalcli-oauth \
@@ -27,9 +32,4 @@ RUN --mount=type=secret,id=ical,target=/app/.config/ical \
     cp /app/.config/web-creds /app/.auth/web-creds && \
     cp /app/.config/gcalcli-oauth /app/.auth/.gcalcli/oauth
 
-COPY ./requirements.txt /app
-RUN pip install -r /app/requirements.txt
-
-COPY . /app
-
-RUN /app/badminton.sh 
+RUN bash -x /app/badminton.sh
