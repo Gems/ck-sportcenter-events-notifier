@@ -29,6 +29,15 @@ jobs:
           fi
       - name: Run the badminton organizer by building the Docker image
         uses: docker/build-push-action@v3
+        env:
+          ICAL_TMPL: ${{ secrets.ICAL_TMPL }}
+          WEB_CREDS: ${{ secrets.WEB_CREDS }}
+          GCAL_CLI_CACHE: ${{ secrets.GCAL_CLI_CACHE }}
+          GCAL_CLI_OAUTH: ${{ secrets.GCAL_CLI_OAUTH }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DEBUG: ${{ secrets.DEBUG }}
+          CLUB_MANAGER_TELEGRAM_NICK: ${{ secrets.CLUB_MANAGER_TELEGRAM_NICK }}
         with:
           context: .
           tags: bad:latest
