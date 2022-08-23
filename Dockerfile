@@ -35,4 +35,4 @@ RUN --mount=type=secret,id=ical,target=/app/.config/ical \
     cp /app/.config/gcalcli-oauth /app/.auth/.gcalcli/oauth && \
     cp /app/.config/gcalcli-cache /app/.auth/.gcalcli/cache
 
-RUN bash -x /app/badminton.sh
+RUN /app/badminton.sh
