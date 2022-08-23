@@ -17,7 +17,7 @@ ARG TELEGRAM_BOT_TOKEN
 ARG TELEGRAM_CHAT_ID
 ARG DEBUG
 ARG CLUB_MANAGER_TELEGRAM_NICK
-ARG NO_RUN
+ARG NO_SPAM
 
 RUN mkdir -p /app/.auth/.gcalcli && \
     if [ -n "$ICAL_TMPL" ]; then echo "$ICAL_TMPL" >/app/ical.tmpl; fi && \
@@ -30,4 +30,4 @@ RUN pip install -r /app/requirements.txt
 
 COPY . /app
 
-RUN echo "Testing…" && /app/badminton.sh
+RUN /app/badminton.sh 

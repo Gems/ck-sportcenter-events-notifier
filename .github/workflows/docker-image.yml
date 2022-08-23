@@ -25,7 +25,7 @@ jobs:
         id: vars
         run: |
           if [ "$GITHUB_REF_NAME" != "master" ]; then
-            echo "::set-output name=norun::yes"
+            echo "::set-output name=nospam::no-please"
           fi
       - name: Run the badminton organizer by building the Docker image
         uses: docker/build-push-action@v3
@@ -35,7 +35,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            NO_RUN=${{ steps.vars.outputs.norun }}
+            NO_SPAM=${{ steps.vars.outputs.nospam }}
             DEBUG=${{ secrets.DEBUG }}
             ICAL_TMPL=${{ secrets.ICAL_TMPL }}
             WEB_CREDS=${{ secrets.WEB_CREDS }}

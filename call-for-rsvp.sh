@@ -114,9 +114,7 @@ function display_additional_info
 
 DOW=$(date +%a)
 
-set -x
-
-if [ -n "${DEBUG}" -o "${DOW}" == "Mon" ]; then
+if [ "${DOW}" == "Mon" -a -z "${NO_SPAM}" ] || [ -n "${DEBUG} "]; then
   echo "Hooray, it's Monday (${DOW})! Sending the message..."
   
   today_date=$(date +%A", "%d" "%B" "%Y)
@@ -124,6 +122,6 @@ if [ -n "${DEBUG}" -o "${DOW}" == "Mon" ]; then
   send_poll false false "Кто заряжен на тренировку на этой неделе? 🏸" "👍 Я охеренно заряжен! ⚡" "👎 Не, я пасану... 🥴"
   display_additional_info
 else
-  echo "Skip sending the message, 'cause it's not Monday (it is $DOW)"
+  echo "Skip sending the message, 'cause it's not Monday (it is $DOW) or no spam ($NO_SPAM)."
 fi
  
