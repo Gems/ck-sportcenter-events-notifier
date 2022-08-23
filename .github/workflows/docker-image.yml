@@ -33,6 +33,7 @@ jobs:
           echo "${{ secrets.ICAL_TMPL }}" > ./config/ical.tmpl
           echo "${{ secrets.WEB_CREDS }}" > ./config/auth/web-creds
           echo "${{ secrets.GCAL_CLI_OAUTH }}" > ./config/gcalcli/oauth
+          echo "${{ secrets.GCAL_CLI_CACHE }}" > ./config/gcalcli/cache
 
       - name: Run the badminton organizer by building the Docker image
         uses: docker/build-push-action@v3
@@ -45,6 +46,7 @@ jobs:
             ical=./config/ical.tmpl
             web-creds=./config/auth/web-creds
             gcalcli-oauth=./config/gcalcli/oauth
+            gcalcli-cache=./config/gcalcli/cache
           build-args: |
             NO_SPAM=${{ steps.config.outputs.nospam }}
             DEBUG=${{ secrets.DEBUG }}

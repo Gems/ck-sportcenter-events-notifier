@@ -28,9 +28,11 @@ COPY . /app
 RUN --mount=type=secret,id=ical,target=/app/.config/ical \
     --mount=type=secret,id=web-creds,target=/app/.config/web-creds \
     --mount=type=secret,id=gcalcli-oauth,target=/app/.config/gcalcli-oauth \
+    --mount=type=secret,id=gcalcli-cache,target=/app/.config/gcalcli-cache \
     mkdir -p /app/.auth/.gcalcli && \
     cp /app/.config/ical /app/ical.tmpl && \
     cp /app/.config/web-creds /app/.auth/web-creds && \
-    cp /app/.config/gcalcli-oauth /app/.auth/.gcalcli/oauth
+    cp /app/.config/gcalcli-oauth /app/.auth/.gcalcli/oauth && \
+    cp /app/.config/gcalcli-cache /app/.auth/.gcalcli/cache
 
 RUN bash -x /app/badminton.sh
