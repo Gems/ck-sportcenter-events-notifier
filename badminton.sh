@@ -10,13 +10,15 @@ export ICAL_SCHEDULE=/tmp/schedule.ical
 
 echo "$(date): Badminton started..." | tee -a ${log}
 
-echo "Checking for gcalcli credentials..."
+echo "Checking for gcalcli cache and credentials..."
 
 if  [ -z "$(cat /app/.auth/.gcalcli/cache)" ] ||
     [ -z "$(cat /app/.auth/.gcalcli/oauth)" ]; then
-  echo "Couldn't find gcalcli credentials. Quiting..." 1>&2
+  echo "Couldn't find gcalcli cache or credentials. Quiting..." 1>&2
   exit 1
 fi
+
+echo "gcalcli cache and credentials check is ok."
 
 ./fetch-schedule.sh 2>&1 | tee -a ${log}
 ./make-ical.sh 2>&1 | tee -a ${log}
