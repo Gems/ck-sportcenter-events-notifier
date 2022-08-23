@@ -114,7 +114,7 @@ function display_additional_info
 
 DOW=$(date +%a)
 
-if [ "${DOW}" == "Mon" -a -z "${NO_SPAM}" ] || [ -n "${DEBUG} " ]; then
+if [ "${DOW}" == "Mon" -a -z "${NO_SPAM}" ] || [ -n "${DEBUG}" ]; then
   echo "Hooray, it's Monday (${DOW})! Sending the message..."
   
   today_date=$(date +%A", "%d" "%B" "%Y)
