@@ -17,7 +17,8 @@ RUN apt-get update && \
     apt-get install -y curl jq locales && \
     sed -i -e "s/# $LANG.*/$LANG UTF-8/" /etc/locale.gen && \
     dpkg-reconfigure --frontend=noninteractive locales && \
-    update-locale LANG=$LANG
+    update-locale LANG=$LANG && \
+    mkdir /app
 
 COPY ./requirements.txt /app
 RUN pip install -r /app/requirements.txt
