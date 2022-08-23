@@ -35,7 +35,6 @@ jobs:
           tags: bad:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          secret-files: config=./config
           build-args: |
             NO_SPAM=${{ steps.config.outputs.nospam }}
             DEBUG=${{ secrets.DEBUG }}
