@@ -115,7 +115,7 @@ function display_additional_info
 DOW=$(date +%a)
 
 if [ -n "${DEBUG}" -o "${DOW}" == "Mon" ]; then
-  echo "Hooray, it's Monday! Sending the message"
+  echo "Hooray, it's Monday (${DOW})! Sending the message..."
   
   today_date=$(date +%A", "%d" "%B" "%Y)
   send_message "Привет, мальчики! Сегодня ${today_date}"
