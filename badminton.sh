@@ -12,8 +12,8 @@ echo "$(date): Badminton started..." | tee -a ${log}
 
 echo "Checking for gcalcli cache and credentials..."
 
-if  [ -z "$(cat /app/.auth/.gcalcli/cache)" ] ||
-    [ -z "$(cat /app/.auth/.gcalcli/oauth)" ]; then
+#if  [ -z "$(cat /app/.auth/.gcalcli/cache)" ] ||
+if    [ -z "$(cat /app/.auth/.gcalcli/oauth)" ]; then
   echo "Couldn't find gcalcli cache or credentials. Quiting..." 1>&2
   exit 1
 fi
