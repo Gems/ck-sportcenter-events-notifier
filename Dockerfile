@@ -19,10 +19,10 @@ RUN apt-get update && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=$LANG
 
-RUN --mount=type=secret,id=config,target=/app/.config mkdir -p /app/.auth/ && \
-    ln -s /app/.config/ical.tmpl /app/ical.tmpl && \
-    ln -s /app/.config/auth/web-creds /app/.auth/web-creds && \
-    ln -s /app/.config/gcalcli /app/.auth/.gcalcli
+RUN --mount=type=secret,id=config,target=/app/.config mkdir -p /app/.auth/.gcalcli && "mount - ok"; \
+    cp /app/.config/ical.tmpl /app/ical.tmpl && echo "ical.tmpl - ok"; \
+    cp -r /app/.config/auth/* /app/.auth/ && echo ".auth - ok"; \
+    cp -r /app/.config/gcalcli/* /app/.auth/.gcalcli/ & echo ".gcalcli - ok"
 
 COPY ./requirements.txt /app
 RUN pip install -r /app/requirements.txt
