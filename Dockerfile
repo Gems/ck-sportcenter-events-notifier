@@ -19,7 +19,7 @@ RUN apt-get update && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=$LANG
 
-RUN RUN --mount=type=secret,id=config,target=/app/.config && \
+RUN --mount=type=secret,id=config,target=/app/.config && \
     mkdir -p /app/.auth/ && \
     ln -s /app/.config/ical.tmpl /app/ical.tmpl && \
     ln -s /app/.config/auth/web-creds /app/.auth/web-creds && \
