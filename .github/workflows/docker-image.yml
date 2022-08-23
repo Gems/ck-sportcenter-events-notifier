@@ -27,6 +27,12 @@ jobs:
           if [ "$GITHUB_REF_NAME" != "master" ]; then
             echo "::set-output name=nospam::no-please"
           fi
+          
+          mkdir -p ./config/auth && mkdir -p ./config/gcalcli
+          
+          echo "${{ secrets.ICAL_TMPL }}" > ./config/ical.tmpl
+          echo "${{ secrets.WEB_CREDS }}" > ./config/auth/web-creds
+          echo "${{ secrets.GCAL_CLI_OAUTH }}" > ./config/gcalcli/oauth
 
       - name: Run the badminton organizer by building the Docker image
         uses: docker/build-push-action@v3
@@ -35,15 +41,16 @@ jobs:
           tags: bad:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          secret-files: |
+            ical=./config/ical.tmpl
+            web-creds=./config/auth/web-creds
+            gcalcli-oauth=./config/gcalcli/oauth
           build-args: |
             NO_SPAM=${{ steps.config.outputs.nospam }}
             DEBUG=${{ secrets.DEBUG }}
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
             CLUB_MANAGER_TELEGRAM_NICK=${{ secrets.CLUB_MANAGER_TELEGRAM_NICK }}
-            "ICAL_TMPL=${{ secrets.ICAL_TMPL }}"
-            "WEB_CREDS=${{ secrets.WEB_CREDS }}"
-            "GCAL_CLI_OAUTH=${{ secrets.GCAL_CLI_OAUTH }}"
 
 
 
