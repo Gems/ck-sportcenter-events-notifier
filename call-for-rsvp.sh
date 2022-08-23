@@ -114,6 +114,8 @@ function display_additional_info
 
 DOW=$(date +%a)
 
+set -x
+
 if [ -n "${DEBUG}" -o "${DOW}" == "Mon" ]; then
   echo "Hooray, it's Monday (${DOW})! Sending the message..."
   
