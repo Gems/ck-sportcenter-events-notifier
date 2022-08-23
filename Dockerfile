@@ -29,10 +29,10 @@ RUN apt-get update && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=$LANG
 
-RUN mkdir -p /app/.auth/.gcalcli && \
-    if [ -n "$ICAL_TMPL" ]; then echo "$ICAL_TMPL" >/app/ical.tmpl; fi && \
-    if [ -n "$WEB_CREDS" ]; then echo "$WEB_CREDS" >/app/.auth/web-creds; fi && \
-    if [ -n "$GCAL_CLI_CACHE" ]; then echo "$GCAL_CLI_CACHE" >/app/.auth/.gcalcli/cache; fi && \
+RUN mkdir -p /app/.auth/.gcalcli; \
+    if [ -n "$ICAL_TMPL" ]; then echo "$ICAL_TMPL" >/app/ical.tmpl; fi; \
+    if [ -n "$WEB_CREDS" ]; then echo "$WEB_CREDS" >/app/.auth/web-creds; fi; \
+    if [ -n "$GCAL_CLI_CACHE" ]; then echo "$GCAL_CLI_CACHE" >/app/.auth/.gcalcli/cache; fi; \
     if [ -n "$GCAL_CLI_OAUTH" ]; then echo "$GCAL_CLI_OAUTH" >/app/.auth/.gcalcli/oauth; fi
 
 COPY ./requirements.txt /app
