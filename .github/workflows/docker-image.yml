@@ -28,12 +28,14 @@ jobs:
             echo "::set-output name=nospam::no-please"
           fi
           
+          echo "::set-output name=build_version::$GITHUB_RUN_ID"
+          
           mkdir -p ./config/auth && mkdir -p ./config/gcalcli
           
           echo "${{ secrets.ICAL_TMPL }}" > ./config/ical.tmpl
           echo "${{ secrets.WEB_CREDS }}" > ./config/auth/web-creds
-          echo "${{ secrets.GCAL_CLI_OAUTH }}" > ./config/gcalcli/oauth
-          echo "${{ secrets.GCAL_CLI_CACHE }}" > ./config/gcalcli/cache
+          echo "${{ secrets.GCALCLI_OAUTH_ENCODED }}" > ./config/gcalcli/oauth
+          echo "${{ secrets.GCALCLI_CACHE_ENCODED }}" > ./config/gcalcli/cache
 
       - name: Run the badminton organizer by building the Docker image
         uses: docker/build-push-action@v3
@@ -53,6 +55,7 @@ jobs:
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
             CLUB_MANAGER_TELEGRAM_NICK=${{ secrets.CLUB_MANAGER_TELEGRAM_NICK }}
+            BUILD_VERSION=${{ steps.config.outputs.build_version }}
 
 
 

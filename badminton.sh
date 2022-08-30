@@ -19,10 +19,17 @@ fi
 
 echo "gcalcli auth config check is ok."
 
-./fetch-schedule.sh 2>&1 | tee -a ${log}
-./make-ical.sh 2>&1 | tee -a ${log}
-./upload-ical.sh 2>&1 | tee -a ${log}
-./call-for-rsvp.sh
+echo "Fetching schedule..." >&2
+bash -$- ./fetch-schedule.sh
 
-echo -e "Badminton's done\n\n" | tee -a ${log}
+echo "Making ICAL..." >&2
+bash -$- ./make-ical.sh
+
+echo "Uploading ICAL..." >&2
+bash -$- ./upload-ical.sh
+
+echo "Call for RSVP..." >&2
+bash -$- ./call-for-rsvp.sh
+
+echo -e "Badminton's done\n\n"
 
