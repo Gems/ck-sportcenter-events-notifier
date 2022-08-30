@@ -1,15 +1,5 @@
 FROM python:3.8-slim-buster
 
-ARG WEB_CREDS
-ARG ICAL_TMPL
-ARG GCAL_CLI_CACHE
-ARG GCAL_CLI_OAUTH
-ARG TELEGRAM_BOT_TOKEN
-ARG TELEGRAM_CHAT_ID
-ARG DEBUG
-ARG CLUB_MANAGER_TELEGRAM_NICK
-ARG NO_SPAM
-
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 
@@ -25,6 +15,16 @@ RUN pip install -r /app/requirements.txt
 
 COPY . /app
 
+ARG WEB_CREDS
+ARG ICAL_TMPL
+ARG GCAL_CLI_CACHE
+ARG GCAL_CLI_OAUTH
+ARG TELEGRAM_BOT_TOKEN
+ARG TELEGRAM_CHAT_ID
+ARG DEBUG
+ARG CLUB_MANAGER_TELEGRAM_NICK
+ARG NO_SPAM
+
 RUN --mount=type=secret,id=ical,target=/app/.config/ical \
     --mount=type=secret,id=web-creds,target=/app/.config/web-creds \
     --mount=type=secret,id=gcalcli-oauth,target=/app/.config/gcalcli-oauth \
@@ -32,7 +32,10 @@ RUN --mount=type=secret,id=ical,target=/app/.config/ical \
     mkdir -p /app/.auth/.gcalcli && \
     cp /app/.config/ical /app/ical.tmpl && \
     cp /app/.config/web-creds /app/.auth/web-creds && \
-    cp /app/.config/gcalcli-oauth /app/.auth/.gcalcli/oauth && \
-    cp /app/.config/gcalcli-cache /app/.auth/.gcalcli/cache
+    cat /app/.config/gcalcli-cache | base64 -d > /app/.auth/.gcalcli/cache && \
+    cat /app/.config/gcalcli-oauth | base64 -d > /app/.auth/.gcalcli/oauth && \
+    echo "Done"
 
-RUN /app/badminton.sh
+ARG BUILD_VERSION
+
+RUN /app/badminton.sh $BUILD_VERSION

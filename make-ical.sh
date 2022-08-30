@@ -17,6 +17,10 @@ export PATH=/usr/local/bin:$PATH
 export LC_ALL=en_US.UTF-8
 export TZ=CET
 
+function log() {
+  echo "$@" >&2
+}
+
 function gcal() {
   gcalcli --config-folder ${GCALCLI_CONFIG} --nocolor --calendar Badminton $@
 }
@@ -38,6 +42,8 @@ function get-datetime() {
 }
 
 function compose-icalevent() {
+  local need_new_line=0
+
   while IFS='%' read -r title date time duration; do
     local uid=`get-uid "event-${date}-${time}-${title}-${duration}"`
     local start_date=`get-datetime ${date} ${time} +%Y%m%dT%H%M%SZ`
@@ -48,9 +54,17 @@ function compose-icalevent() {
     local event_date=`get-datetime ${date} ${time} +%s`
 
     if [ $curr_date -ge $event_date ]; then
+      log -n "."
+      need_new_line=1
       continue
     fi
 
+    if [ ${need_new_line} -eq 1 ]; then
+      log -e ""
+      need_new_line=0
+    fi
+
+    log -n "Looking if event '${description} is already registered... "
     local event=`gcal search "${description}" | grep -vE '^$' | grep -vFi 'No events'`
 
     if [ -n "${event}" ]; then
@@ -58,9 +72,12 @@ function compose-icalevent() {
       local found_title="${event:21}"
     
       if [ $found_date -eq $event_date ] && [ "${title}" = "${found_title}" ]; then
+        log "Found date is the same, skipped."
         continue
       fi
     fi
+
+    log "Not registered, creating ICAL entry."
 
     printf "\
 BEGIN:VEVENT\n\
@@ -93,5 +110,5 @@ cat >>${ICAL_SCHEDULE} <<__EOF
 END:VCALENDAR
 __EOF
 
-echo "Make ICAL: done"
+log "Make ICAL: done"
 
