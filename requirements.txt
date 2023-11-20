@@ -2,3 +2,37 @@ gcalcli==v4.1.0
 vobject
 codenamize
 
+
+
+New automation requirements:
+On Sunday - we poll for attendance (6PM).
+On Monday at 9:30 if not everybody voted - we send a reminder with tagging non-voted personnel (to complete the voting until 10:30)
+On Monday 10:45AM we send a summary of all votes
+We check the number of voters and see if we need to book/cancel courts based on the following info:
+Voting will be updated with following answers:
+		0 - won't come
+		1 - will come, prefer doubles
+		2 - will come, can play 1 hour singles, but then prefer doubles
+		3 - will come, can play 2 hours singles
+We'll go reverse order trying to reserve courts for:
+	1 - Each 2 users that can play singles for 2 hours - need a court for 2 hours
+	2 - Each 2 users that can play singles for 1 hour - need a court for 1 hour, and then for each 4 users need a court for 1 hour for doubles games
+	3 - Each 4 users that prefer doubles - need a court for 2 hours
+
+With all this info - calculate the number of courts required
+Check if we have more than needed - auto-cancel those courts
+If we do not have enough - try booking any court (until successfully booked) - then a message to channel
+
+
+New automation required for call-for-payments
+every month (1st of the month) - call for cash
+	target: avg last month usage + 20% split equally for all non-paused players
+	check if there is accumulated balance - subtract it from the target
+	the amount splt will be mentioned in a message
+	a Digicash QR code will be sent requesting that amount
+	Need to find a way to auto transfer funds to CK
+
+New functionality required for pause/resume. minimum 2-4 weeks of pausing is allowed. Pause command will require the duration to be inputed upfront. If less than x weeks - not pausing (payments).
+
+
+

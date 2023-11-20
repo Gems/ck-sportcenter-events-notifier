@@ -1,0 +1,411 @@
+{
+    "ok": true,
+    "result": [{
+            "update_id": 570719889,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 105012155,
+                    "is_bot": false,
+                    "first_name": "Andrey",
+                    "last_name": "Ilyukhin",
+                    "username": "andreyprag"
+                },
+                "option_ids": [0]
+            }
+        }, {
+            "update_id": 570719890,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 1
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 0
+                    }
+                ],
+                "total_voter_count": 1,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }, {
+            "update_id": 570719891,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 1001904845,
+                    "is_bot": false,
+                    "first_name": "Victor",
+                    "last_name": "Nedioglo",
+                    "language_code": "en"
+                },
+                "option_ids": [0]
+            }
+        }, {
+            "update_id": 570719892,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 2
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 0
+                    }
+                ],
+                "total_voter_count": 2,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }, {
+            "update_id": 570719893,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 739053193,
+                    "is_bot": false,
+                    "first_name": "Adam Nowak"
+                },
+                "option_ids": [0]
+            }
+        }, {
+            "update_id": 570719894,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 888772836,
+                    "is_bot": false,
+                    "first_name": "Alex"
+                },
+                "option_ids": [0]
+            }
+        }, {
+            "update_id": 570719895,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 4
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 0
+                    }
+                ],
+                "total_voter_count": 4,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }, {
+            "update_id": 570719896,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 5
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 0
+                    }
+                ],
+                "total_voter_count": 5,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }, {
+            "update_id": 570719897,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 36438691,
+                    "is_bot": false,
+                    "first_name": "\u042d\u0434",
+                    "username": "gomolyako",
+                    "language_code": "en"
+                },
+                "option_ids": [0]
+            }
+        }, {
+            "update_id": 570719898,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 1823417994,
+                    "is_bot": false,
+                    "first_name": "Serge"
+                },
+                "option_ids": [1]
+            }
+        }, {
+            "update_id": 570719899,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 5
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 1
+                    }
+                ],
+                "total_voter_count": 6,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }, {
+            "update_id": 570719900,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 1070218100,
+                    "is_bot": false,
+                    "first_name": "Anton",
+                    "last_name": "Malmygin"
+                },
+                "option_ids": [0]
+            }
+        }, {
+            "update_id": 570719901,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 6
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 1
+                    }
+                ],
+                "total_voter_count": 7,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }, {
+            "update_id": 570719902,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 1869897419,
+                    "is_bot": false,
+                    "first_name": "CK",
+                    "last_name": "YY",
+                    "username": "ckyy13"
+                },
+                "option_ids": [0]
+            }
+        }, {
+            "update_id": 570719903,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 7
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 1
+                    }
+                ],
+                "total_voter_count": 8,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }, {
+            "update_id": 570719904,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 1753105063,
+                    "is_bot": false,
+                    "first_name": "Dima"
+                },
+                "option_ids": [0]
+            }
+        }, {
+            "update_id": 570719905,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 8
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 1
+                    }
+                ],
+                "total_voter_count": 9,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }, {
+            "update_id": 570719906,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 9
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 1
+                    }
+                ],
+                "total_voter_count": 10,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }, {
+            "update_id": 570719907,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 444282287,
+                    "is_bot": false,
+                    "first_name": "Alexander",
+                    "last_name": "Dimitrov",
+                    "username": "nam3less_dee"
+                },
+                "option_ids": [0]
+            }
+        }, {
+            "update_id": 570719908,
+            "message": {
+                "message_id": 2523,
+                "from": {
+                    "id": 1001904845,
+                    "is_bot": false,
+                    "first_name": "Victor",
+                    "last_name": "Nedioglo",
+                    "language_code": "en"
+                },
+                "chat": {
+                    "id": -1001656870655,
+                    "title": "Бадминтон клуб 🏸",
+                    "type": "supergroup"
+                },
+                "date": 1695660595,
+                "message_thread_id": 2520,
+                "reply_to_message": {
+                    "message_id": 2520,
+                    "from": {
+                        "id": 1806299146,
+                        "is_bot": true,
+                        "first_name": "Секретарша",
+                        "username": "assistant_female_bot"
+                    },
+                    "chat": {
+                        "id": -1001656870655,
+                        "title": "Бадминтон клуб 🏸",
+                        "type": "supergroup"
+                    },
+                    "date": 1695629289,
+                    "poll": {
+                        "id": "5226825270513631873",
+                        "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                        "options": [{
+                                "text": "👍 Я охеренно заряжен! ⚡",
+                                "voter_count": 9
+                            }, {
+                                "text": "👎 Не, я пасану... 🥴",
+                                "voter_count": 1
+                            }
+                        ],
+                        "total_voter_count": 10,
+                        "is_closed": false,
+                        "is_anonymous": false,
+                        "type": "regular",
+                        "allows_multiple_answers": false
+                    }
+                },
+                "text": "Wow! Почти фул хаус!"
+            }
+        }, {
+            "update_id": 570719909,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 5265700012,
+                    "is_bot": false,
+                    "first_name": "Ivan",
+                    "last_name": "Atamanov"
+                },
+                "option_ids": [1]
+            }
+        }, {
+            "update_id": 570719910,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 9
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 2
+                    }
+                ],
+                "total_voter_count": 11,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }, {
+            "update_id": 570719911,
+            "poll_answer": {
+                "poll_id": "5226825270513631873",
+                "user": {
+                    "id": 512936906,
+                    "is_bot": false,
+                    "first_name": "Igor",
+                    "username": "igosm"
+                },
+                "option_ids": [0]
+            }
+        }, {
+            "update_id": 570719912,
+            "poll": {
+                "id": "5226825270513631873",
+                "question": "Кто заряжен на тренировку на этой неделе? 🏸",
+                "options": [{
+                        "text": "👍 Я охеренно заряжен! ⚡",
+                        "voter_count": 10
+                    }, {
+                        "text": "👎 Не, я пасану... 🥴",
+                        "voter_count": 2
+                    }
+                ],
+                "total_voter_count": 12,
+                "is_closed": false,
+                "is_anonymous": false,
+                "type": "regular",
+                "allows_multiple_answers": false
+            }
+        }
+    ]
+}
