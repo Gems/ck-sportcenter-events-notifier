@@ -104,21 +104,21 @@ function display_additional_info
   then
     send_message "😱 O.M.G. ‼️ У нас нет зарезервированных кортов на этой неделе❗\n\n${CLUB_MANAGER_TELEGRAM_NICK} всё под контролем⁉️"
     #send_sticker "CAACAgIAAxkBAAEEozlidMUCwS_lpQ_UIQRs_j3dkvaNNgACugUAAj-VzArb-JYvDlr2bCQE"
-    send_sticker "$(get_random_sticker no-reservation)"
+    #send_sticker "$(get_random_sticker no-reservation)"
   else
     send_message "✍️ По кортам - у нас забронировано:\n${reservations_string}\n\n${CLUB_MANAGER_TELEGRAM_NICK} ❤️"
     #send_sticker "CAACAgIAAxkBAAEEozdidMSw9bPzUCTgR4lBsv-NQJ98ygACvAUAAj-VzAoTSKpoG9FPRiQE"
-    send_sticker "$(get_random_sticker)"
+    #send_sticker "$(get_random_sticker)"
   fi
 }
 
 DOW=$(date +%a)
 
-if [ "${DOW}" == "Mon" -a -z "${NO_SPAM}" ] || [ -n "${DEBUG}" ]; then
-  echo "Hooray, it's Monday (${DOW})! Sending the message..."
+if [ "${DOW}" == "Sun" -a -z "${NO_SPAM}" ] || [ -n "${DEBUG}" ]; then
+  echo "Hooray, it's Sunday (${DOW})! Sending the message..."
   
   today_date=$(date +%A", "%d" "%B" "%Y)
-  send_message "Привет, мальчики! Сегодня ${today_date}"
+  send_message "Привет, мальчики! Добьемся новых спортивных успехов! ☭"
   send_poll false false "Кто заряжен на тренировку на этой неделе? 🏸" "👍 Я охеренно заряжен! ⚡" "👎 Не, я пасану... 🥴"
   display_additional_info
 else
